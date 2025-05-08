@@ -1,12 +1,70 @@
-
 {
-    "id": 2,
-    "title": "Cinta di Kota Tua",
-    "description": "Kisah romantis di sudut bersejarah Jakarta",
-    "genre": ["Drama", "Romance"],
-    "rating": 4.2,
-    "duration": "1h 45m",
-    "releaseYear": 2023,
-    "poster": "movie2.jpg",
-    "videoUrl": "https://example.com/movies/2.mp4"
+  "id": 2,
+  "title": "Ketua BEM and His Secret Wife",
+  "episodes": [
+    {
+      "id": "s1e1",
+      "title": "Episode 1: Pertemuan Pertama",
+      "description": "Awal pertemuan Dani, seorang mahasiswa berprestasi yang terpilih menjadi ketua BEM, dengan Nadia, mahasiswi sederhana jurusan sastra yang menjadi teman sekelasnya.",
+      "duration": "45 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e1.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e2",
+      "title": "Episode 2: Rahasia Tersimpan",
+      "description": "Dani dan Nadia ternyata sudah menikah sejak SMA karena perjodohan keluarga, namun memutuskan untuk merahasiakan status mereka di kampus.",
+      "duration": "42 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e2.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e3",
+      "title": "Episode 3: Komplikasi",
+      "description": "Posisi Dani sebagai ketua BEM membuatnya populer di kalangan mahasiswi, sementara Nadia harus berpura-pura hanya sebagai teman biasa.",
+      "duration": "47 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e3.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e4",
+      "title": "Episode 4: Ujian Hubungan",
+      "description": "Hubungan mereka diuji ketika Dani harus bekerja sama dengan Kirana, mahasiswi cantik dan ambisius yang tertarik padanya.",
+      "duration": "45 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e4.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e5",
+      "title": "Episode 5: Kecemburuan",
+      "description": "Nadia mulai merasa cemburu melihat kedekatan Dani dengan Kirana, sementara ia tidak bisa mengungkapkan perasaannya secara terbuka.",
+      "duration": "44 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e5.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e6",
+      "title": "Episode 6: Hampir Terbongkar",
+      "description": "Status pernikahan mereka hampir terbongkar ketika teman-teman kampus mengunjungi rumah Dani secara mendadak.",
+      "duration": "46 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e6.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e7",
+      "title": "Episode 7: Pilihan Sulit",
+      "description": "Dani harus membuat pilihan sulit antara fokus pada karirnya di organisasi kampus atau mempertahankan pernikahannya yang mulai retak.",
+      "duration": "48 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e7.mp4",
+      "thumbnail": "movie2.jpg"
+    },
+    {
+      "id": "s1e8",
+      "title": "Episode 8: Pengakuan",
+      "description": "Dalam situasi yang mendesak, Dani akhirnya mengakui status pernikahannya di depan seluruh anggota BEM.",
+      "duration": "50 menit",
+      "videoUrl": "https://example.com/videos/ketua_bem_s1e8.mp4",
+      "thumbnail": "movie2.jpg"
+    }
+  ]
 }
