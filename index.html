@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FilmKita - Nonton Film Terbaik Indonesia</title>
-    <meta name="description" content="Situs nonton film online terbaik dengan koleksi film Indonesia terbaru dan terlengkap">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.4.5/swiper-bundle.min.css">
+    <title>FilmKita - Situs Nonton Film Indonesia Terlengkap</title>
+    <meta name="description" content="Streaming film Indonesia terbaru dan terpopuler. Nonton film favorit kapan saja dan di mana saja secara online.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="FilmKita - Situs Nonton Film Indonesia Terlengkap">
+    <meta property="og:description" content="Streaming film Indonesia terbaru dan terpopuler. Nonton film favorit kapan saja dan di mana saja secara online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://filmkita.id">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="css/custom.css">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
@@ -172,7 +180,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <a href="/" class="flex items-center">
-                        <img src="assets/images/logo.png" alt="FilmKita" class="h-8 mr-2">
+                        <img src="assets/images/logo.svg" alt="FilmKita" class="h-8 mr-2">
                         <span class="text-xl font-bold text-white">FilmKita</span>
                     </a>
                     <p class="text-gray-400 mt-2">Situs nonton film Indonesia terlengkap</p>
@@ -209,8 +217,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/vlite.min.js"></script>
     <script src="js/main.js" type="module"></script>
+    <script src="js/search.js" type="module"></script>
     <script>
         AOS.init({
             duration: 800,

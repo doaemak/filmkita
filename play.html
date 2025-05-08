@@ -1,226 +1,423 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Putar Film - FilmKita</title>
+    <title>Tonton Film - FilmKita</title>
+    <meta name="description" content="Streaming film Indonesia terbaru dan terpopuler. Nonton film favorit kapan saja dan di mana saja secara online.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Tonton Film - FilmKita">
+    <meta property="og:description" content="Streaming film Indonesia terbaru dan terpopuler. Nonton film favorit kapan saja dan di mana saja secara online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://filmkita.id">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/vlite.css">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Additional CSS for player page -->
     <style>
-        body {
-            overflow: hidden;
-            background: #000;
-        }
-        
-        #playerContainer {
-            width: 100vw;
-            height: 100vh;
+        .video-player-container {
             position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
         
-        #player {
-            width: 100%;
-            height: 100%;
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
         
-        #back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.6);
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-3px);
+        }
+        
+        .back-button svg {
+            margin-right: 0.5rem;
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        
+        .film-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
+            font-size: 0.85rem;
+            font-weight: 600;
             border-radius: 9999px;
-            padding: 10px;
-            cursor: pointer;
+            margin-right: 0.75rem;
+        }
+        
+        .film-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .meta-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            opacity: 0.7;
         }
         
-        #back-button:hover {
-            background: rgba(109, 40, 217, 0.8);
-            opacity: 1;
+        .meta-item svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 0.5rem;
         }
         
-        #movie-info {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            border-radius: 8px;
-            padding: 10px 15px;
-            max-width: 300px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+        .film-synopsis {
+            line-height: 1.7;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
         }
         
-        #movie-info:hover {
-            opacity: 1;
+        .review-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 1rem;
         }
         
-        #movie-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
         
-        #movie-details {
-            font-size: 0.85rem;
-            opacity: 0.9;
+        .star-rating {
+            display: flex;
+            color: #ffc107;
         }
         
-        .pulse-animation {
-            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.6;
-            }
+        .other-films {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
         }
     </style>
 </head>
 <body>
-    <div id="playerContainer">
-        <div id="player"></div>
-        
-        <button id="back-button" onclick="window.location.href='index.html'" title="Kembali ke Beranda">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"></path>
-            </svg>
-        </button>
-        
-        <div id="movie-info">
-            <div id="movie-title">Memuat...</div>
-            <div id="movie-details">Memuat detail film...</div>
-        </div>
-        
-        <div id="loading" class="absolute inset-0 flex items-center justify-center bg-black">
-            <div class="flex flex-col items-center">
-                <div class="animate-spin rounded-full h-16 w-16 border-4 border-[rgba(139,92,246,0.3)] border-t-[#8b5cf6] mb-4"></div>
-                <div class="text-xl font-semibold text-white pulse-animation">Memuat Film</div>
-                <div class="text-gray-400 mt-2">Mohon tunggu sebentar...</div>
-            </div>
-        </div>
-        
-        <div id="error" class="hidden absolute inset-0 flex items-center justify-center bg-black">
-            <div class="text-white text-center max-w-md p-8 bg-[rgba(0,0,0,0.7)] rounded-xl backdrop-blur-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-                <p class="text-2xl font-bold mb-2">Gagal Memuat Film</p>
-                <p class="text-gray-300 mb-6">Film yang Anda cari tidak ditemukan atau terjadi kesalahan saat memuat.</p>
-                <button onclick="window.location.href='index.html'" class="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium px-6 py-3 rounded-full transition-all">
-                    Kembali ke Beranda
-                </button>
-            </div>
-        </div>
-    </div>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="assets/images/logo.svg" alt="FilmKita" class="logo-img">
+                    <span>FilmKita</span>
+                </a>
 
-    <script src="js/vlite.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const movieId = urlParams.get('id');
-        const loading = document.getElementById('loading');
-        const error = document.getElementById('error');
-        const movieTitle = document.getElementById('movie-title');
-        const movieDetails = document.getElementById('movie-details');
-        
-        async function loadMovie() {
-            try {
-                const response = await fetch(`/data/movies/${movieId}.json`);
-                if (!response.ok) throw new Error('Movie not found');
+                <div class="nav-search">
+                    <input type="text" placeholder="Cari film..." id="searchInput">
+                </div>
+
+                <div class="nav-links">
+                    <a href="index.html#trending">Trending</a>
+                    <a href="index.html#terbaru">Terbaru</a>
+                    <a href="index.html#kategori">Kategori</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="player-container px-4 md:px-8">
+        <a href="index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Kembali ke Beranda
+        </a>
+
+        <div class="video-player-container">
+            <div id="player"></div>
+        </div>
+
+        <div class="movie-details mt-8">
+            <h1 id="movieTitle" class="movie-title">Memuat...</h1>
+            
+            <div class="film-meta">
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span id="movieDuration">--</span>
+                </div>
                 
-                const movie = await response.json();
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span id="movieYear">--</span>
+                </div>
+                
+                <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                    <span id="movieRating">--</span>
+                </div>
+            </div>
+            
+            <div id="movieGenres" class="movie-tags"></div>
+            
+            <p id="movieDescription" class="movie-description">Memuat deskripsi film...</p>
+            
+            <h3 class="section-heading">Ulasan</h3>
+            
+            <div id="reviews" class="review-list">
+                <div class="review-card shimmer-bg">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="h-10 w-10 rounded-full"></div>
+                            <div class="ml-3">
+                                <div class="h-5 w-32 rounded"></div>
+                                <div class="h-4 w-24 rounded mt-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-4 w-full rounded"></div>
+                    <div class="h-4 w-full rounded mt-2"></div>
+                    <div class="h-4 w-3/4 rounded mt-2"></div>
+                </div>
+            </div>
+            
+            <h3 class="section-heading">Film Serupa</h3>
+            
+            <div id="relatedMovies" class="related-grid shimmer-bg">
+                <!-- Related movies will be displayed here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer bg-black/40 backdrop-blur-md py-8 px-4 md:px-8 mt-16">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="flex items-center">
+                        <img src="assets/images/logo.svg" alt="FilmKita" class="h-8 mr-2">
+                        <span class="text-xl font-bold text-white">FilmKita</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">Situs nonton film Indonesia terlengkap</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+                    <div>
+                        <h4 class="font-bold mb-2">Kategori</h4>
+                        <ul class="space-y-1 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Aksi</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Komedi</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Drama</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Horor</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold mb-2">Tautan</h4>
+                        <ul class="space-y-1 text-gray-400">
+                            <li><a href="index.html#trending" class="hover:text-white transition-colors">Trending</a></li>
+                            <li><a href="index.html#terbaru" class="hover:text-white transition-colors">Terbaru</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Tentang Kami</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Kontak</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 FilmKita. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+        
+        // Get movie ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const movieId = params.get('id');
+        
+        // Elements
+        const playerElement = document.getElementById('player');
+        const movieTitle = document.getElementById('movieTitle');
+        const movieDuration = document.getElementById('movieDuration');
+        const movieYear = document.getElementById('movieYear');
+        const movieRating = document.getElementById('movieRating');
+        const movieGenres = document.getElementById('movieGenres');
+        const movieDescription = document.getElementById('movieDescription');
+        const reviewsSection = document.getElementById('reviews');
+        const relatedMoviesSection = document.getElementById('relatedMovies');
+        
+        // Fetch and display movie details
+        async function loadMovieDetails() {
+            try {
+                // Fetch movie data
+                const response = await fetch('data/movies.json');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load movie data');
+                }
+                
+                const movies = await response.json();
+                
+                // Find the movie by ID
+                const movie = movies.find(m => m.id == movieId);
+                
+                if (!movie) {
+                    throw new Error('Film tidak ditemukan');
+                }
+                
+                // Update the page title
                 document.title = `${movie.title} - FilmKita`;
                 
-                // Update movie info
+                // Set movie details
                 movieTitle.textContent = movie.title;
-                movieDetails.textContent = `${movie.genre.join(', ')} | ${movie.duration} | ${movie.year}`;
+                movieDuration.textContent = movie.duration || '120 menit';
+                movieYear.textContent = movie.year || '---';
+                movieRating.textContent = movie.rating ? movie.rating.toFixed(1) : '---';
+                movieDescription.textContent = movie.description || 'Deskripsi tidak tersedia.';
                 
-                new Vlitejs('#player', {
+                // Set video source
+                const player = new Vlitejs(playerElement, {
                     options: {
                         controls: true,
-                        autoplay: true,
+                        autoplay: false,
                         playsinline: true,
-                        muted: false,
-                        loop: false,
-                        poster: movie.coverUrl || '',
+                        loop: false
                     },
-                    source: {
-                        type: 'video',
-                        sources: [{
-                            src: movie.videoUrl,
-                            type: 'video/mp4'
-                        }]
-                    },
+                    provider: 'video',
                     onReady: () => {
-                        loading.style.display = 'none';
-                    },
-                    onError: (error) => {
-                        console.error('Player error:', error);
-                        loading.style.display = 'none';
-                        document.getElementById('error').style.display = 'flex';
+                        console.log('Player is ready');
                     }
                 });
-            } catch (err) {
-                console.error('Error:', err);
-                loading.style.display = 'none';
-                error.style.display = 'flex';
+                
+                // Display genres
+                if (movie.genre && movie.genre.length > 0) {
+                    movieGenres.innerHTML = '';
+                    
+                    if (Array.isArray(movie.genre)) {
+                        movie.genre.forEach(genre => {
+                            const genreTag = document.createElement('span');
+                            genreTag.className = 'movie-tag';
+                            genreTag.textContent = genre;
+                            movieGenres.appendChild(genreTag);
+                        });
+                    } else {
+                        const genreTag = document.createElement('span');
+                        genreTag.className = 'movie-tag';
+                        genreTag.textContent = movie.genre;
+                        movieGenres.appendChild(genreTag);
+                    }
+                } else {
+                    movieGenres.innerHTML = '<span class="movie-tag">Umum</span>';
+                }
+                
+                // Display reviews (mock data)
+                const mockReviews = [
+                    {
+                        user: 'Budi Santoso',
+                        date: '12 Apr 2025',
+                        rating: 4.5,
+                        comment: 'Film yang sangat menarik dengan visual yang memukau. Alur cerita sangat baik dan tidak membosankan.'
+                    },
+                    {
+                        user: 'Siti Aminah',
+                        date: '10 Apr 2025',
+                        rating: 5,
+                        comment: 'Salah satu film terbaik yang pernah saya tonton. Acting dari para pemain sangat natural dan menyentuh hati.'
+                    }
+                ];
+                
+                reviewsSection.innerHTML = '';
+                
+                mockReviews.forEach(review => {
+                    const stars = '★'.repeat(Math.floor(review.rating)) + (review.rating % 1 > 0 ? '½' : '');
+                    
+                    reviewsSection.innerHTML += `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">
+                                    <div class="reviewer-avatar bg-primary-light/30"></div>
+                                    <div>
+                                        <div class="reviewer-name">${review.user}</div>
+                                        <div class="review-date">${review.date}</div>
+                                    </div>
+                                </div>
+                                <div class="review-stars">${stars}</div>
+                            </div>
+                            <div class="review-content">${review.comment}</div>
+                        </div>
+                    `;
+                });
+                
+                // Display related movies
+                const relatedMovies = movies
+                    .filter(m => {
+                        if (m.id === movie.id) return false;
+                        
+                        // Find movies with same genre
+                        if (Array.isArray(movie.genre) && Array.isArray(m.genre)) {
+                            return m.genre.some(g => movie.genre.includes(g));
+                        }
+                        
+                        return false;
+                    })
+                    .slice(0, 6);
+                
+                relatedMoviesSection.innerHTML = '';
+                
+                relatedMovies.forEach(relatedMovie => {
+                    relatedMoviesSection.innerHTML += `
+                        <div class="film-card">
+                            <a href="play.html?id=${relatedMovie.id}">
+                                <img src="assets/images/${relatedMovie.poster}" 
+                                     alt="${relatedMovie.title}"
+                                     loading="lazy" class="w-full aspect-[2/3] object-cover rounded-lg">
+                                <div class="film-info p-3">
+                                    <h3 class="text-lg font-semibold">${relatedMovie.title}</h3>
+                                    <p class="text-sm text-gray-400">${Array.isArray(relatedMovie.genre) ? relatedMovie.genre.join(' • ') : relatedMovie.genre}</p>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                movieTitle.textContent = 'Error loading movie';
+                movieDescription.textContent = error.message;
             }
         }
         
-        // Hide UI elements when inactive
-        let timeout;
-        function setupUIHiding() {
-            const uiElements = [
-                document.getElementById('back-button'),
-                document.getElementById('movie-info')
-            ];
-            
-            function showUI() {
-                uiElements.forEach(el => {
-                    el.style.opacity = '0.7';
-                });
-                clearTimeout(timeout);
-                timeout = setTimeout(hideUI, 3000);
-            }
-            
-            function hideUI() {
-                uiElements.forEach(el => {
-                    el.style.opacity = '0';
-                });
-            }
-            
-            document.addEventListener('mousemove', showUI);
-            document.addEventListener('keydown', showUI);
-            document.addEventListener('click', showUI);
-            
-            showUI();
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            loadMovie();
-            setupUIHiding();
-        });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadMovieDetails);
     </script>
 </body>
 </html>

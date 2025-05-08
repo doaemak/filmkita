@@ -1,16 +1,9 @@
-// Config
-const CONFIG = {
-  ITEMS_PER_PAGE: 12,
-  API_BASE_URL: '/data/movies',
-  ANIMATION_DURATION: 300
-};
-
-// State Management
+// State
 const state = {
   movies: [],
   currentPage: 1,
-  currentGenre: 'all',
-  isLoading: false
+  moviesPerPage: 12,
+  currentGenre: 'all'
 };
 
 // DOM Elements
@@ -18,57 +11,54 @@ const elements = {
   filmGrid: document.getElementById('filmGrid'),
   loadMoreBtn: document.getElementById('loadMoreBtn'),
   loadingMore: document.getElementById('loadingMore'),
-  genreButtons: document.querySelectorAll('.genre-btn')
+  genreButtons: document.querySelectorAll('.genre-btn'),
+  searchInput: document.getElementById('searchInput')
 };
 
-// Movie Loading & Display
+// API Functions
 async function loadMovies() {
-  if (state.isLoading) return;
-
   try {
-    state.isLoading = true;
     toggleLoading(true);
-
-    const response = await fetch(`${CONFIG.API_BASE_URL}.json`);
-    if (!response.ok) throw new Error('Failed to load movies');
-
+    
+    // Fetch dari data/movies.json
+    const response = await fetch('data/movies.json');
+    
+    if (!response.ok) {
+      throw new Error('Gagal memuat data film');
+    }
+    
     state.movies = await response.json();
+    
+    // Initialize display after data is loaded
     displayMovies();
-
+    
+    toggleLoading(false);
   } catch (error) {
     console.error('Error:', error);
-    showError('Failed to load movies');
-  } finally {
-    state.isLoading = false;
+    showError('Gagal memuat data film. Silakan coba lagi nanti.');
     toggleLoading(false);
   }
 }
 
+// Display Functions
 function displayMovies() {
-  const trendingGrid = document.querySelector('.trending-grid');
-  const newReleasesGrid = document.querySelector('.new-releases-grid');
-  const filmGrid = document.querySelector('#filmGrid');
-  
-  trendingGrid.innerHTML = '';
-  newReleasesGrid.innerHTML = '';
-  
+  // Filter movies based on current genre
   const filteredMovies = filterMovies();
-  const trendingMovies = filteredMovies.filter(m => m.trending).slice(0, 6);
-  const newMovies = filteredMovies.sort((a,b) => new Date(b.releaseDate) - new Date(a.releaseDate)).slice(0, 6);
   
-  trendingMovies.forEach(movie => {
-    trendingGrid.appendChild(createMovieCard(movie));
-  });
+  // Get the movies for the current page
+  const startIndex = 0;
+  const endIndex = state.currentPage * state.moviesPerPage;
+  const moviesToShow = filteredMovies.slice(startIndex, endIndex);
   
-  newMovies.forEach(movie => {
-    newReleasesGrid.appendChild(createMovieCard(movie));
-  });
+  // Clear the film grid if first page
+  if (state.currentPage === 1) {
+    elements.filmGrid.innerHTML = '';
+  }
   
-  // For category section
-  const moviesToShow = filteredMovies.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
-  filmGrid.innerHTML = '';
+  // Create and append movie cards
   moviesToShow.forEach(movie => {
-    filmGrid.appendChild(createMovieCard(movie));
+    const card = createMovieCard(movie);
+    elements.filmGrid.appendChild(card);
   });
   
   updateLoadMoreButton(moviesToShow.length >= filteredMovies.length);
