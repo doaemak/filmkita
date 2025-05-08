@@ -1,0 +1,17 @@
+
+[
+  {
+    "id": 1,
+    "title": "Sample Movie 1",
+    "poster": "movie1.jpg",
+    "genre": ["Action", "Adventure"],
+    "rating": 4.5
+  },
+  {
+    "id": 2,
+    "title": "Sample Movie 2",
+    "poster": "movie2.jpg",
+    "genre": ["Drama", "Romance"],
+    "rating": 4.2
+  }
+]

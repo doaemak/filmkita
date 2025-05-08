@@ -1,0 +1,12 @@
+
+{
+    "id": 2,
+    "title": "Cinta di Kota Tua",
+    "description": "Kisah romantis di sudut bersejarah Jakarta",
+    "genre": ["Drama", "Romance"],
+    "rating": 4.2,
+    "duration": "1h 45m",
+    "releaseYear": 2023,
+    "poster": "movie2.jpg",
+    "videoUrl": "https://example.com/movies/2.mp4"
+}

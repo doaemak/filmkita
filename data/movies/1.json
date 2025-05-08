@@ -1,0 +1,12 @@
+
+{
+    "id": 1,
+    "title": "Petualangan di Nusantara",
+    "description": "Sebuah petualangan epik melintasi keindahan Indonesia",
+    "genre": ["Action", "Adventure"],
+    "rating": 4.5,
+    "duration": "2h 15m",
+    "releaseYear": 2023,
+    "poster": "movie1.jpg",
+    "videoUrl": "https://example.com/movies/1.mp4"
+}

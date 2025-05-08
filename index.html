@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmKita - Nonton Film Terbaik Indonesia</title>
+    <meta name="description" content="Situs nonton film online terbaik dengan koleksi film Indonesia terbaru dan terlengkap">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.4.5/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <img src="assets/images/logo.svg" alt="FilmKita" class="logo-img">
+                    <span></span>
+                </a>
+
+                <div class="nav-search">
+                    <input type="text" placeholder="Cari film..." id="searchInput">
+                </div>
+
+                <div class="nav-links">
+                    <a href="#trending">Trending</a>
+                    <a href="#terbaru">Terbaru</a>
+                    <a href="#kategori">Kategori</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="trending" class="section-container">
+            <div class="container mx-auto">
+                <h2 class="section-title">Trending</h2>
+                <div class="film-grid trending-grid">
+                    <!-- Trending movies will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="terbaru" class="section-container">
+            <div class="container mx-auto">
+                <h2 class="section-title">Terbaru</h2>
+                <div class="film-grid new-releases-grid">
+                    <!-- New releases will be loaded here -->
+                </div>
+            </div>
+        </section>
+            <div class="swiper hero-swiper h-[70vh] md:h-[80vh]">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide relative shimmer-bg"></div>
+                    <div class="swiper-slide relative shimmer-bg"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section class="py-8 px-4 md:px-8" id="kategori">
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold mb-4 md:mb-0" data-aos="fade-right">Kategori Film</h2>
+                    <div class="flex flex-wrap gap-2" data-aos="fade-left">
+                        <button class="genre-btn active" data-genre="all">Semua</button>
+                        <button class="genre-btn" data-genre="action">Aksi</button>
+                        <button class="genre-btn" data-genre="comedy">Komedi</button>
+                        <button class="genre-btn" data-genre="drama">Drama</button>
+                        <button class="genre-btn" data-genre="horror">Horor</button>
+                        <button class="genre-btn" data-genre="romance">Romantis</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="filmGrid" class="film-grid py-8 px-4 md:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-2xl font-bold mb-6" data-aos="fade-right">Film Terbaru</h2>
+                <div id="filmGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 p-4" style="min-height: 400px">
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                    <div class="film-card shimmer-bg"></div>
+                </div>
+
+                <div id="loadingMore" class="text-center mt-8 hidden">
+                    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                    <p class="mt-2">Memuat lebih banyak film...</p>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="loadMoreBtn" class="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 px-6 py-3 rounded-full font-medium transition-all">
+                        Muat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer bg-black/40 backdrop-blur-md py-8 px-4 md:px-8 mt-16">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="flex items-center">
+                        <img src="assets/images/logo.png" alt="FilmKita" class="h-8 mr-2">
+                        <span class="text-xl font-bold text-white">FilmKita</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">Situs nonton film Indonesia terlengkap</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+                    <div>
+                        <h4 class="font-bold mb-2">Kategori</h4>
+                        <ul class="space-y-1 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Aksi</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Komedi</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Drama</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Horor</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold mb-2">Tautan</h4>
+                        <ul class="space-y-1 text-gray-400">
+                            <li><a href="#trending" class="hover:text-white transition-colors">Trending</a></li>
+                            <li><a href="#terbaru" class="hover:text-white transition-colors">Terbaru</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Tentang Kami</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Kontak</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500">
+                <p>&copy; 2025 FilmKita. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/vlite.min.js"></script>
+    <script src="js/main.js" type="module"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+
+        new Swiper('.hero-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service worker registered'))
+                    .catch(err => console.log('Service worker not registered', err));
+            });
+        }
+    </script>
+</body>
+</html>
