@@ -87,31 +87,78 @@
         </section>
 
 
-        <section id="filmGrid" class="film-grid py-8 px-4 md:px-8">
+        <section class="py-12 px-4 md:px-8" id="filmList">
             <div class="container mx-auto">
-                <h2 class="text-2xl font-bold mb-6" data-aos="fade-right">Film Terbaru</h2>
-                <div id="filmGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 p-4" style="min-height: 400px">
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
-                    <div class="film-card shimmer-bg"></div>
+                <h2 class="section-title" data-aos="fade-right">Film Terbaru</h2>
+                <div id="filmGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6" style="min-height: 400px">
+                    <!-- Skeleton loading cards -->
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="film-card shimmer-bg">
+                        <div class="h-60 rounded-t-lg"></div>
+                        <div class="p-3">
+                            <div class="h-5 w-3/4 rounded mb-2"></div>
+                            <div class="h-4 w-1/2 rounded"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="loadingMore" class="text-center mt-8 hidden">
-                    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                    <p class="mt-2">Memuat lebih banyak film...</p>
+                    <div class="flex flex-col items-center">
+                        <div class="animate-spin rounded-full h-10 w-10 border-4 border-[rgba(139,92,246,0.3)] border-t-[#8b5cf6]"></div>
+                        <p class="mt-4 text-gray-400">Memuat lebih banyak film...</p>
+                    </div>
                 </div>
 
-                <div class="text-center mt-8">
-                    <button id="loadMoreBtn" class="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 px-6 py-3 rounded-full font-medium transition-all">
+                <div class="text-center mt-12">
+                    <button id="loadMoreBtn" class="text-base font-medium transition-all">
                         Muat Lebih Banyak
                     </button>
                 </div>

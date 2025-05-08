@@ -248,6 +248,9 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .load-more-btn:hover,
@@ -259,6 +262,25 @@ body {
 .load-more-btn:active,
 #loadMoreBtn:active {
   transform: translateY(0);
+}
+
+.load-more-btn::before,
+#loadMoreBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  transition: all 0.5s ease;
+  z-index: -1;
+  border-radius: 9999px;
+}
+
+.load-more-btn:hover::before,
+#loadMoreBtn:hover::before {
+  width: 100%;
 }
 
 /* Shimmer effect for loading */
