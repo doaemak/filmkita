@@ -263,6 +263,7 @@
         // Get movie ID from URL
         const params = new URLSearchParams(window.location.search);
         const movieId = params.get('id');
+        const episodeId = params.get('episode') || 1; // Default ke episode 1 jika tersedia
         
         // Elements
         const playerElement = document.getElementById('player');
@@ -294,6 +295,20 @@
                     throw new Error('Film tidak ditemukan');
                 }
                 
+                // Load episode data if this movie has episodes
+                if (movie.hasEpisodes) {
+                    try {
+                        const episodeResponse = await fetch(`data/movies/${movie.id}.json`);
+                        if (episodeResponse.ok) {
+                            const episodeData = await episodeResponse.json();
+                            movie.episodes = episodeData.episodes;
+                            console.log(`Loaded episodes for ${movie.title}`);
+                        }
+                    } catch (episodeError) {
+                        console.error(`Error loading episodes for movie ${movie.id}:`, episodeError);
+                    }
+                }
+                
                 // Update the page title
                 document.title = `${movie.title} - FilmKita`;
                 
@@ -303,6 +318,38 @@
                 movieYear.textContent = movie.year || '---';
                 movieRating.textContent = movie.rating ? movie.rating.toFixed(1) : '---';
                 movieDescription.textContent = movie.description || 'Deskripsi tidak tersedia.';
+                
+                // Add episode selection if movie has episodes
+                if (movie.episodes && movie.episodes.length > 0) {
+                    // Create episode selector
+                    const episodeSelector = document.createElement('div');
+                    episodeSelector.className = 'mt-4 mb-2';
+                    episodeSelector.innerHTML = `
+                        <h3 class="text-lg font-semibold mb-2">Episode</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${movie.episodes.map(ep => `
+                                <a href="play.html?id=${movie.id}&episode=${ep.id}" 
+                                   class="px-3 py-1 rounded-full ${ep.id == episodeId ? 'bg-primary text-white' : 'bg-gray-700/50 hover:bg-gray-600/70'}">
+                                    ${ep.title}
+                                </a>
+                            `).join('')}
+                        </div>
+                    `;
+                    movieDescription.parentNode.insertBefore(episodeSelector, movieDescription);
+                    
+                    // Get the current episode
+                    const currentEpisode = movie.episodes.find(ep => ep.id == episodeId) || movie.episodes[0];
+                    
+                    // Update title and description with episode info
+                    const episodeTitle = document.createElement('div');
+                    episodeTitle.className = 'text-lg font-semibold mt-4 text-primary';
+                    episodeTitle.textContent = `Episode ${currentEpisode.id}: ${currentEpisode.title}`;
+                    movieDescription.parentNode.insertBefore(episodeTitle, movieDescription);
+                    
+                    if (currentEpisode.description) {
+                        movieDescription.textContent = currentEpisode.description;
+                    }
+                }
                 
                 // Set video source
                 const player = new Vlitejs(playerElement, {
@@ -394,12 +441,18 @@
                 relatedMoviesSection.innerHTML = '';
                 
                 relatedMovies.forEach(relatedMovie => {
+                    // Poster path handling with fallback
+                    const posterPath = relatedMovie.poster ? 
+                        (`assets/images/${relatedMovie.poster}`) : 
+                        ('https://via.placeholder.com/300x450?text=No+Poster');
+                        
                     relatedMoviesSection.innerHTML += `
                         <div class="film-card">
                             <a href="play.html?id=${relatedMovie.id}">
-                                <img src="assets/images/${relatedMovie.poster}" 
+                                <img src="${posterPath}" 
                                      alt="${relatedMovie.title}"
-                                     loading="lazy" class="w-full aspect-[2/3] object-cover rounded-lg">
+                                     loading="lazy" class="w-full aspect-[2/3] object-cover rounded-lg"
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450/1e1e1e/a0a0a0?text=Film+Kita';">
                                 <div class="film-info p-3">
                                     <h3 class="text-lg font-semibold">${relatedMovie.title}</h3>
                                     <p class="text-sm text-gray-400">${Array.isArray(relatedMovie.genre) ? relatedMovie.genre.join(' • ') : relatedMovie.genre}</p>

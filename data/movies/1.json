@@ -1,12 +1,41 @@
-
 {
-    "id": 1,
-    "title": "Petualangan di Nusantara",
-    "description": "Sebuah petualangan epik melintasi keindahan Indonesia",
-    "genre": ["Action", "Adventure"],
-    "rating": 4.5,
-    "duration": "2h 15m",
-    "releaseYear": 2023,
-    "poster": "movie1.jpg",
-    "videoUrl": "https://example.com/movies/1.mp4"
+  "id": 1,
+  "title": "Petualangan Sherina",
+  "episodes": [
+    {
+      "id": 1,
+      "title": "Pertemuan",
+      "description": "Sherina pindah ke sekolah baru dan bertemu dengan Sadam. Awalnya mereka tidak akur, namun akhirnya menjadi teman baik.",
+      "duration": "25 menit",
+      "videoUrl": "https://example.com/videos/sherina/ep1.mp4"
+    },
+    {
+      "id": 2,
+      "title": "Persahabatan",
+      "description": "Sherina dan Sadam menjadi semakin dekat dan mulai bermain musik bersama. Mereka menghadapi beberapa rintangan kecil.",
+      "duration": "22 menit",
+      "videoUrl": "https://example.com/videos/sherina/ep2.mp4"
+    },
+    {
+      "id": 3,
+      "title": "Petualangan Dimulai",
+      "description": "Sherina dan Sadam diculik oleh gerombolan penjahat dan melarikan diri ke hutan. Mereka berusaha menyelamatkan diri.",
+      "duration": "28 menit",
+      "videoUrl": "https://example.com/videos/sherina/ep3.mp4"
+    },
+    {
+      "id": 4,
+      "title": "Perjuangan",
+      "description": "Sherina dan Sadam berjuang melewati berbagai rintangan di hutan sambil berusaha mencari bantuan.",
+      "duration": "26 menit",
+      "videoUrl": "https://example.com/videos/sherina/ep4.mp4"
+    },
+    {
+      "id": 5,
+      "title": "Penyelamatan",
+      "description": "Orang tua Sherina dan Sadam akhirnya menemukan mereka. Para penjahat tertangkap dan semua kembali normal.",
+      "duration": "30 menit",
+      "videoUrl": "https://example.com/videos/sherina/ep5.mp4"
+    }
+  ]
 }

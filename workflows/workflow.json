@@ -1,0 +1,5 @@
+{
+  "commands": [
+    { "basename": "Belajar-web", "command": "vite" }
+  ]
+}

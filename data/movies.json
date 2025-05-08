@@ -9,7 +9,8 @@
     "poster": "posters/sherina.jpg",
     "videoUrl": "https://example.com/videos/sherina.mp4",
     "duration": "110 menit",
-    "trending": true
+    "trending": true,
+    "hasEpisodes": true
   },
   {
     "id": 2,

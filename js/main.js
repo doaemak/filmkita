@@ -27,7 +27,26 @@ async function loadMovies() {
       throw new Error('Gagal memuat data film');
     }
     
-    state.movies = await response.json();
+    const movies = await response.json();
+    state.movies = movies;
+    
+    // Cek untuk film dengan banyak episode
+    for (const movie of movies) {
+      if (movie.hasEpisodes) {
+        try {
+          // Jika film punya episode, ambil data tambahan dari /data/movies/{id}.json
+          const episodeResponse = await fetch(`data/movies/${movie.id}.json`);
+          if (episodeResponse.ok) {
+            const episodeData = await episodeResponse.json();
+            // Simpan data episode ke film
+            movie.episodes = episodeData.episodes;
+            console.log(`Loaded episodes for ${movie.title}`);
+          }
+        } catch (episodeError) {
+          console.error(`Error loading episodes for movie ${movie.id}:`, episodeError);
+        }
+      }
+    }
     
     // Initialize display after data is loaded
     displayMovies();
