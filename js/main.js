@@ -95,9 +95,24 @@ function createMovieCard(movie) {
 }
 
 function filterMovies() {
-  return state.currentGenre === 'all'
-    ? state.movies
-    : state.movies.filter(movie => movie.genre.toLowerCase().includes(state.currentGenre));
+  if (state.currentGenre === 'all') {
+    return state.movies;
+  }
+  
+  return state.movies.filter(movie => {
+    // Periksa apakah genre adalah string atau array
+    if (Array.isArray(movie.genre)) {
+      // Jika array, periksa apakah ada genre yang cocok
+      return movie.genre.some(g => 
+        g.toLowerCase().includes(state.currentGenre.toLowerCase())
+      );
+    } else if (typeof movie.genre === 'string') {
+      // Jika string, periksa apakah genre cocok
+      return movie.genre.toLowerCase().includes(state.currentGenre.toLowerCase());
+    }
+    
+    return false;
+  });
 }
 
 function updateLoadMoreButton(hide) {
