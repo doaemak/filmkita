@@ -109,7 +109,9 @@
         
         .star-rating {
             display: flex;
+            gap: 2px;
             color: #ffc107;
+            font-size: 0.9rem;
         }
         
         .other-films {
@@ -172,7 +174,7 @@
                 </div>
                 
                 <div class="meta-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-yellow-400">
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
                     <span id="movieRating">--</span>
@@ -479,9 +481,12 @@
                 
                 relatedMovies.forEach(relatedMovie => {
                     // Poster path handling with fallback
-                    const posterPath = relatedMovie.poster ? 
-                        (`assets/images/${relatedMovie.poster}`) : 
-                        ('https://via.placeholder.com/300x450?text=No+Poster');
+                    let posterPath;
+                    if (relatedMovie.poster) {
+                        posterPath = `assets/images/${relatedMovie.poster}`;
+                    } else {
+                        posterPath = 'https://via.placeholder.com/300x450/1e1e1e/a0a0a0?text=Film+Kita';
+                    }
                         
                     relatedMoviesSection.innerHTML += `
                         <div class="film-card">

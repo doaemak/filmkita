@@ -115,10 +115,13 @@ function createMovieCard(movie) {
   // Tahun (jika ada)
   const yearHTML = movie.year ? `<span class="text-xs px-2 py-1 bg-black/30 rounded-md">${movie.year}</span>` : '';
 
-  // Fallback image for missing poster
-  const posterPath = movie.poster ? 
-    (`assets/images/${movie.poster}`) : 
-    ('https://via.placeholder.com/300x450?text=No+Poster');
+  // Poster path handling with better fallback
+  let posterPath;
+  if (movie.poster) {
+    posterPath = `assets/images/${movie.poster}`;
+  } else {
+    posterPath = 'https://via.placeholder.com/300x450/1e1e1e/a0a0a0?text=Film+Kita';
+  }
   
   card.innerHTML = `
     <a href="play.html?id=${movie.id}">
