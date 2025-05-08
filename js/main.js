@@ -96,12 +96,18 @@ function createMovieCard(movie) {
   // Tahun (jika ada)
   const yearHTML = movie.year ? `<span class="text-xs px-2 py-1 bg-black/30 rounded-md">${movie.year}</span>` : '';
 
+  // Fallback image for missing poster
+  const posterPath = movie.poster ? 
+    (`assets/images/${movie.poster}`) : 
+    ('https://via.placeholder.com/300x450?text=No+Poster');
+  
   card.innerHTML = `
     <a href="play.html?id=${movie.id}">
       <div class="relative overflow-hidden rounded-t-lg">
-        <img src="assets/images/${movie.poster}" 
+        <img src="${posterPath}" 
              alt="${movie.title}"
-             loading="lazy" class="w-full aspect-[2/3] object-cover transition-transform duration-700">
+             loading="lazy" class="w-full aspect-[2/3] object-cover transition-transform duration-700"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450/1e1e1e/a0a0a0?text=Film+Kita';">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
           <button class="bg-primary hover:bg-primary-light text-white rounded-full p-2 transform translate-y-8 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

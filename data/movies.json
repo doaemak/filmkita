@@ -6,7 +6,7 @@
     "rating": 4.8,
     "year": 2000,
     "description": "Petualangan Sherina adalah film musikal drama keluarga Indonesia tahun 2000 yang disutradarai oleh Riri Riza dan diproduksi oleh Mira Lesmana.",
-    "poster": "sherina.jpg",
+    "poster": "posters/sherina.jpg",
     "videoUrl": "https://example.com/videos/sherina.mp4",
     "duration": "110 menit",
     "trending": true
@@ -18,7 +18,7 @@
     "rating": 4.7,
     "year": 2008,
     "description": "Laskar Pelangi adalah film drama Indonesia tahun 2008 yang diadaptasi dari novel berjudul sama karya Andrea Hirata.",
-    "poster": "laskar_pelangi.jpg",
+    "poster": "posters/laskar_pelangi.jpg",
     "videoUrl": "https://example.com/videos/laskar_pelangi.mp4",
     "duration": "125 menit",
     "trending": true
